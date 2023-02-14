@@ -1,2 +1,3 @@
 photos_to_extract
-output.txt
+*txt
+*yaml

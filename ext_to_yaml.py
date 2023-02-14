@@ -6,8 +6,8 @@ import yaml
 # Path to the folder containing image files
 image_folder = '/home/develeap/Documents/extract_text/photos_to_extract'
 
-# String to hold the concatenated text from all images
-text = ''
+# Dictionary to hold the extracted text for each image
+yaml_data = {}
 
 # Loop through each image file in the folder
 for filename in os.listdir(image_folder):
@@ -18,9 +18,9 @@ for filename in os.listdir(image_folder):
         # Extract the text from the image
         image_text = pytesseract.image_to_string(img)
 
-        # Append the extracted text to the string
-        text += image_text
+        # Add the extracted text to the dictionary
+        yaml_data[filename] = image_text
 
-# Write the concatenated text to a file
-with open('output.txt', 'w') as f:
-    f.write(text)
+# Write the dictionary to a YAML file
+with open('output.yaml', 'w') as f:
+    yaml.dump(yaml_data, f)
