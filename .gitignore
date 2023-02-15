@@ -1,3 +1,4 @@
 photos_to_extract
-*txt
-*yaml
+*.txt
+*.yaml
+*.md
