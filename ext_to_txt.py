@@ -2,16 +2,21 @@ import os
 import pytesseract
 from PIL import Image
 
-image_folder = './photos_to_extract'
+# The folder that contains the photos to extract the text from
+input_folder = './photos_to_extract'
 
-photo_text = ''
+# The name of the *new* file to extract the text to.
+# txt/md files would be the best
+output_file = 'output.md'
 
+output_text = ''
 # Loop through each image file in the folder
-for filename in os.listdir(image_folder):
+
+for filename in os.listdir(input_folder):
     if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.bmp'):
 
         # Open the image file
-        img = Image.open(os.path.join(image_folder, filename))
+        img = Image.open(os.path.join(input_folder, filename))
 
         # Extract the text from the image
         image_text = pytesseract.image_to_string(img, config='-c tessedit_create_txt=1')
@@ -24,10 +29,8 @@ for filename in os.listdir(image_folder):
         # Remove any blank lines from the extracted text
         image_text = '\n'.join([line for line in image_text.split('\n') if line.strip()])
 
-        # Append the extracted text to the photo_text variable
-        photo_text += f"==========================================\n{image_text}\n\n"
-        # photo_text += f"==== {filename} ====\n{image_text}\n\n"
+        # Append the extracted text to the output_text variable and separate each by "="
+        output_text += f"==========================================\n{image_text}\n\n"
 
-
-with open('photo_text.md', 'w') as f:
-    f.write(photo_text)
+with open(output_file, 'w') as f:
+    f.write(output_text)
