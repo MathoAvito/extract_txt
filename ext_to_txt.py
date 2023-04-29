@@ -13,7 +13,7 @@ output_text = ''
 # Loop through each image file in the folder
 
 for filename in os.listdir(input_folder):
-    if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.bmp'):
+    if filename.endswith('.jpeg') or filename.endswith('.png') or filename.endswith('.bmp') or filename.endswith('.jpg'):
 
         # Open the image file
         img = Image.open(os.path.join(input_folder, filename))
